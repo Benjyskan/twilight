@@ -13,6 +13,7 @@
 	const assignRequired = () => {
 		console.log("assignRequired tech.required:", tech.required);
 		let newRequired: string[] = [];
+
 		for (let i = 0; i < tech.required.Biotic; i++) newRequired.push(bioticLogo);
 		for (let i = 0; i < tech.required.Cybernetic; i++)
 			newRequired.push(cyberneticLogo);
@@ -20,23 +21,11 @@
 			newRequired.push(propulsionLogo);
 		for (let i = 0; i < tech.required.Warfare; i++)
 			newRequired.push(warfareLogo);
-		// for (let i = 0; i < tech.required.Biotic; i++) required.push(bioticLogo);
-		// for (let i = 0; i < tech.required.Cybernetic; i++)
-		// 	required.push(cyberneticLogo);
-		// for (let i = 0; i < tech.required.Propulsion; i++)
-		// 	required.push(propulsionLogo);
-		// for (let i = 0; i < tech.required.Warfare; i++) required.push(warfareLogo);
+
 		return newRequired;
 	};
 
 	required = assignRequired();
-
-	// for (let i = 0; i < requiredCost.Biotic; i++) required.push(bioticLogo);
-	// for (let i = 0; i < requiredCost.Cybernetic; i++)
-	// 	required.push(cyberneticLogo);
-	// for (let i = 0; i < requiredCost.Propulsion; i++)
-	// 	required.push(propulsionLogo);
-	// for (let i = 0; i < requiredCost.Warfare; i++) required.push(warfareLogo);
 
 	console.log("in TechDisplay", tech.name, required);
 
@@ -59,6 +48,7 @@
 
 <main>
 	<div class="title" style="color: {color}">{tech.name}</div>
+
 	<div class="tech-require">
 		{#each required as img}
 			<div class="img-container">
@@ -66,12 +56,16 @@
 			</div>
 		{/each}
 	</div>
-	<div>{tech.description}</div>
-	<div class="tech-provide img-container">
-		<img class="scaled-down-img" src={bioticLogo} alt="bioticLogo" />
+
+	<div class="description">{tech.description}</div>
+
+	<div class="tech-provide">
+		<div class="img-container">
+			<img class="scaled-down-img" src={bioticLogo} alt="bioticLogo" />
+		</div>
 	</div>
+
 	<button
-		class="bottom"
 		on:click={() => {
 			required = assignRequired();
 		}}>refresh</button
@@ -82,23 +76,39 @@
 	main {
 		border: 1px solid black;
 		display: grid;
-		width: fit-content;
-		grid-template-columns: auto 1fr auto;
+		width: 12rem;
+		// width: fit-content;
+		grid-template-columns: min-content 1fr min-content;
+		grid-template-rows: min-content 1fr min-content;
+
+		& > * {
+			grid-column: 2;
+		}
 
 		.title {
 			text-align: center;
-			grid-column: span 3;
-			// margin: 0;
 		}
 
-		.bottom {
-			grid-column: span 3;
+		.description {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.tech-require {
+			grid-column: 1;
+			grid-row: 1 / span 3;
+		}
+		.tech-provide {
+			grid-column: -1;
+			grid-row: 1 / span 3;
 		}
 	}
 
 	.img-container {
 		height: 1rem;
 		width: 1rem;
+		padding: 2px;
 		/* border: 1px solid black; */
 	}
 

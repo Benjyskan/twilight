@@ -8,7 +8,7 @@
 </script>
 
 <main>
-  <h1>Hello Typescript!</h1>
+  <h1>TI tech editor</h1>
 
   <TechForm bind:techs />
   {#each techs as tech}
