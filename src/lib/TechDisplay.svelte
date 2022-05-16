@@ -58,35 +58,48 @@
 </script>
 
 <main>
-	{#each required as img}
-		<div class="img-container">
-			<img class="scaled-down-img" src={img} alt="altLogo" />
-		</div>
-	{/each}
-	<p style="color: {color}">{tech.name}</p>
-	<div class="img-container">
+	<div class="title" style="color: {color}">{tech.name}</div>
+	<div class="tech-require">
+		{#each required as img}
+			<div class="img-container">
+				<img class="scaled-down-img" src={img} alt="altLogo" />
+			</div>
+		{/each}
+	</div>
+	<div>{tech.description}</div>
+	<div class="tech-provide img-container">
 		<img class="scaled-down-img" src={bioticLogo} alt="bioticLogo" />
 	</div>
 	<button
+		class="bottom"
 		on:click={() => {
-			// tech = {...tech}
 			required = assignRequired();
-			console.log("TechDisplay:", tech);
-			console.log("TechDispay required:", required);
 		}}>refresh</button
 	>
 </main>
 
-<style>
+<style lang="scss">
 	main {
 		border: 1px solid black;
-		display: flex;
+		display: grid;
+		width: fit-content;
+		grid-template-columns: auto 1fr auto;
+
+		.title {
+			text-align: center;
+			grid-column: span 3;
+			// margin: 0;
+		}
+
+		.bottom {
+			grid-column: span 3;
+		}
 	}
 
 	.img-container {
-		height: 30px;
-		width: 30px;
-		border: 1px solid black;
+		height: 1rem;
+		width: 1rem;
+		/* border: 1px solid black; */
 	}
 
 	.scaled-down-img {

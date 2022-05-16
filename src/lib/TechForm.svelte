@@ -46,7 +46,7 @@
 			);
 			techs = newTechs;
 		}
-		console.log("newTechs:", techs);
+		console.log("submit end, techs:", techs);
 	};
 </script>
 

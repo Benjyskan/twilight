@@ -15,9 +15,9 @@
     <div>
       <hr />
       <TechDisplay {tech} />
-      {JSON.stringify(tech)}
     </div>
   {/each}
+  {JSON.stringify(techs)}
 </main>
 
 <style>
