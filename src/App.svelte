@@ -11,13 +11,6 @@
   <h1>Hello Typescript!</h1>
 
   <TechForm bind:techs />
-  <button
-    on:click={() => {
-      console.log("techs before", techs);
-      techs = [...techs];
-      console.log("techs after", techs);
-    }}>refresh</button
-  >
   {#each techs as tech}
     <div>
       <hr />

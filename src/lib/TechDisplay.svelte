@@ -11,14 +11,21 @@
 	let required: string[] = [];
 
 	const assignRequired = () => {
-		console.log('assignRequired tech.required:', tech.required)
+		console.log("assignRequired tech.required:", tech.required);
 		let newRequired: string[] = [];
-		for (let i = 0; i < tech.required.Biotic; i++) required.push(bioticLogo);
+		for (let i = 0; i < tech.required.Biotic; i++) newRequired.push(bioticLogo);
 		for (let i = 0; i < tech.required.Cybernetic; i++)
-			required.push(cyberneticLogo);
+			newRequired.push(cyberneticLogo);
 		for (let i = 0; i < tech.required.Propulsion; i++)
-			required.push(propulsionLogo);
-		for (let i = 0; i < tech.required.Warfare; i++) required.push(warfareLogo);
+			newRequired.push(propulsionLogo);
+		for (let i = 0; i < tech.required.Warfare; i++)
+			newRequired.push(warfareLogo);
+		// for (let i = 0; i < tech.required.Biotic; i++) required.push(bioticLogo);
+		// for (let i = 0; i < tech.required.Cybernetic; i++)
+		// 	required.push(cyberneticLogo);
+		// for (let i = 0; i < tech.required.Propulsion; i++)
+		// 	required.push(propulsionLogo);
+		// for (let i = 0; i < tech.required.Warfare; i++) required.push(warfareLogo);
 		return newRequired;
 	};
 
