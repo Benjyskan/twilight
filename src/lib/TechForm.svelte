@@ -1,11 +1,11 @@
 <script lang="ts">
+	const { log } = console;
 	import type { Tech, TechType, Faction } from "../types/tech.types";
 	import { techTypes, factions } from "../const";
 	import LevelCounter from "./LevelCounter.svelte";
 
 	export let techs: Tech[] = [];
 
-	const { log } = console;
 	let tech: Tech = {
 		name: "Neural Motivator",
 		techType: "Biotic",
@@ -14,7 +14,6 @@
 		required: {},
 		level: 0,
 	};
-	let required = { ...tech.required };
 
 	const setTechType = (techType: TechType) => (e: Event) => {
 		tech.techType = techType;
@@ -23,13 +22,12 @@
 	const handleSubmit = (e: SubmitEvent) => {
 		log("submit");
 		let newTech: Tech = { ...tech };
-		newTech.required = { ...required };
 
 		const find = techs.find((elem) => elem.name === newTech.name);
 
 		if (find === undefined) techs = [...techs, newTech];
 		else {
-			let newTechs = techs.map<Tech>((elem) =>
+			let newTechs = techs.map((elem) =>
 				elem.name == tech.name ? newTech : elem
 			);
 			techs = newTechs;
@@ -74,7 +72,7 @@
 	<!-- Required -->
 	<span class="grid-span-2">tech level required:</span>
 	{#each techTypes as techType}
-		<LevelCounter bind:count={required[techType]} /><span>{techType}</span>
+		<LevelCounter bind:count={tech.required[techType]} /><span>{techType}</span>
 	{/each}
 
 	<!-- Description -->
