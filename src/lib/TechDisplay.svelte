@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { RessourceCost, Tech, TechType } from "src/types/tech.types";
+	import type { Tech, TechType } from "src/types/tech.types";
 	import bioticLogo from "../../TI4_Icons_2021/Color/General Icons/Biotic dark.png";
 	import cyberneticLogo from "../../TI4_Icons_2021/Color/General Icons/Cybernetic dark.png";
 	import propulsionLogo from "../../TI4_Icons_2021/Color/General Icons/Propulsion dark.png";

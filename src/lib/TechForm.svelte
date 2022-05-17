@@ -20,7 +20,7 @@
 		tech.techType = techType;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: SubmitEvent) => {
 		log("submit");
 		let newTech: Tech = { ...tech };
 		newTech.required = { ...required };
