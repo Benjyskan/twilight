@@ -7,8 +7,6 @@
 
 	export let tech: Tech;
 
-	let required: string[] = [];
-
 	const assignRequired = () => {
 		console.log("assignRequired tech.required:", tech.required);
 		let newRequired: string[] = [];
@@ -24,9 +22,7 @@
 		return newRequired;
 	};
 
-	required = assignRequired();
-
-	console.log("in TechDisplay", tech.name, required);
+	let required = assignRequired();
 
 	function getColor(techType: TechType) {
 		let color: string;
