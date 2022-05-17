@@ -1,5 +1,4 @@
 <script lang="ts">
-  // import logo from "./assets/svelte.png";
   import TechDisplay from "./lib/TechDisplay.svelte";
   import TechForm from "./lib/TechForm.svelte";
   import type { Tech } from "./types/tech.types";
@@ -11,14 +10,13 @@
   <h1>TI tech editor</h1>
 
   <TechForm bind:techs />
+
   <div class="flex">
     {#each techs as tech}
-      <!-- <div class="flex"> -->
-      <!-- <hr /> -->
       <TechDisplay {tech} />
-      <!-- </div> -->
     {/each}
   </div>
+
   {JSON.stringify(techs)}
 </div>
 

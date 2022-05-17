@@ -92,7 +92,6 @@
 	form {
 		padding: 0.2rem;
 		display: grid;
-		/* margin: 1rem; */
 		gap: 0.2rem;
 		grid-template-columns: min-content 1fr;
 		border: 1px solid black;
@@ -102,7 +101,6 @@
 	.flex {
 		display: flex;
 		justify-content: center;
-		/* align-items: center; */
 		flex-wrap: wrap;
 	}
 

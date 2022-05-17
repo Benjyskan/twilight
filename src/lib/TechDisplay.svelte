@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Tech, TechType } from "src/types/tech.types";
-	import bioticLogo from "../../TI4_Icons_2021/Color/General Icons/Biotic dark.png";
-	import cyberneticLogo from "../../TI4_Icons_2021/Color/General Icons/Cybernetic dark.png";
-	import propulsionLogo from "../../TI4_Icons_2021/Color/General Icons/Propulsion dark.png";
-	import warfareLogo from "../../TI4_Icons_2021/Color/General Icons/Warfare dark.png";
+	import bioticLogo from "../assets/Biotic light.png";
+	import cyberneticLogo from "../assets/Cybernetic light.png";
+	import propulsionLogo from "../assets/Propulsion light.png";
+	import warfareLogo from "../assets/Warfare light.png";
 
 	export let tech: Tech;
 
