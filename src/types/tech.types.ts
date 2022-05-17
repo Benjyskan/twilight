@@ -10,11 +10,11 @@ export type RessourceCost = {
 }
 
 export type Tech = {
-	techType: TechType
+	// techType: TechType
+	techType: TechType | null
 	name: string
 	description: string
 	required: RessourceCost
-	provide: RessourceCost
 	level: number
 	isFactionTech: Faction | null
 }

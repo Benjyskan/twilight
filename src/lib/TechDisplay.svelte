@@ -6,7 +6,6 @@
 	import warfareLogo from "../../TI4_Icons_2021/Color/General Icons/Warfare dark.png";
 
 	export let tech: Tech;
-	// export let requiredCost: RessourceCost;
 
 	let required: string[] = [];
 
@@ -29,25 +28,38 @@
 
 	console.log("in TechDisplay", tech.name, required);
 
-	let color: string;
-	switch (tech.techType) {
-		case "Biotic":
-			color = "green";
-			break;
-		case "Cybernetic":
-			color = "yellow";
-			break;
-		case "Propulsion":
-			color = "blue";
-			break;
-		case "Warfare":
-			color = "red";
-			break;
+	function getColor(techType: TechType) {
+		let color: string;
+		switch (techType) {
+			case "Biotic":
+				color = "green";
+				break;
+			case "Cybernetic":
+				color = "chocolate";
+				break;
+			case "Propulsion":
+				color = "blue";
+				break;
+			case "Warfare":
+				color = "red";
+				break;
+			default:
+				color = "black";
+				break;
+		}
+		return color;
+	}
+
+	function getTechImg(type: TechType) {
+		if (type === "Biotic") return bioticLogo;
+		if (type === "Cybernetic") return cyberneticLogo;
+		if (type === "Propulsion") return propulsionLogo;
+		if (type === "Warfare") return warfareLogo;
 	}
 </script>
 
-<main>
-	<div class="title" style="color: {color}">{tech.name}</div>
+<div class="main">
+	<div class="title" style="color: {getColor(tech.techType)}">{tech.name}</div>
 
 	<div class="tech-require">
 		{#each required as img}
@@ -60,9 +72,15 @@
 	<div class="description">{tech.description}</div>
 
 	<div class="tech-provide">
-		<div class="img-container">
-			<img class="scaled-down-img" src={bioticLogo} alt="bioticLogo" />
-		</div>
+		{#if tech.techType}
+			<div class="img-container">
+				<img
+					class="scaled-down-img"
+					src={getTechImg(tech.techType)}
+					alt="bioticLogo"
+				/>
+			</div>
+		{/if}
 	</div>
 
 	<button
@@ -70,14 +88,15 @@
 			required = assignRequired();
 		}}>refresh</button
 	>
-</main>
+</div>
 
 <style lang="scss">
-	main {
+	.main {
 		border: 1px solid black;
+		width: clamp(9rem, 20vw, 18rem);
+		margin-top: 0.5rem;
+		margin-left: 0.5rem;
 		display: grid;
-		width: 12rem;
-		// width: fit-content;
 		grid-template-columns: min-content 1fr min-content;
 		grid-template-rows: min-content 1fr min-content;
 
@@ -109,7 +128,6 @@
 		height: 1rem;
 		width: 1rem;
 		padding: 2px;
-		/* border: 1px solid black; */
 	}
 
 	.scaled-down-img {

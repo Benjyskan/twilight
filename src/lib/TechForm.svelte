@@ -1,41 +1,29 @@
 <script lang="ts">
 	import type { Tech, TechType, Faction } from "../types/tech.types";
+	import { techTypes, factions } from "../const";
 	import LevelCounter from "./LevelCounter.svelte";
 
 	export let techs: Tech[] = [];
-	const techTypes: TechType[] = [
-		"Biotic",
-		"Cybernetic",
-		"Propulsion",
-		"Warfare",
-	];
 
-	const factions: Faction[] = ["The Arborec"];
-
+	const { log } = console;
 	let tech: Tech = {
 		name: "Neural Motivator",
 		techType: "Biotic",
 		description: "During the status phase, draw 2 action cards instead of 1.",
 		isFactionTech: null,
 		required: {},
-		provide: { Biotic: 1 },
 		level: 0,
 	};
-
 	let required = { ...tech.required };
-	let provide = { ...tech.provide };
 
-	const logTech = (e) => {
-		console.log(tech);
+	const setTechType = (techType: TechType) => (e: Event) => {
+		tech.techType = techType;
 	};
 
 	const handleSubmit = (e) => {
-		console.log("submit");
+		log("submit");
 		let newTech: Tech = { ...tech };
-		console.log("sumbit: before", newTech.required);
 		newTech.required = { ...required };
-		console.log("sumbit: after", newTech.required);
-		newTech.provide = { ...provide };
 
 		const find = techs.find((elem) => elem.name === newTech.name);
 
@@ -46,21 +34,27 @@
 			);
 			techs = newTechs;
 		}
-		console.log("submit end, techs:", techs);
+		log("submit end, techs:", techs);
 	};
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
+	<!-- Name -->
 	<span class="no-wrap">name: </span>
 	<input label="label" type="text" bind:value={tech.name} />
 
-	<span class="no-wrap">tech type:</span>
-	<select name="techType" bind:value={tech.techType}>
+	<!-- Tech Type -->
+	<span class="grid-span-2">tech type: {tech.techType}</span>
+	<div class="grid-span-2 flex">
 		{#each techTypes as techType}
-			<option value={techType}>{techType}</option>
+			<button on:click|preventDefault={setTechType(techType)}>
+				{techType}
+			</button>
 		{/each}
-	</select>
+		<button on:click|preventDefault={setTechType(null)}>null</button>
+	</div>
 
+	<!-- Faction -->
 	<span class="no-wrap">for faction:</span>
 	<select bind:value={tech.isFactionTech}>
 		<option value={null}>none</option>
@@ -69,6 +63,7 @@
 		{/each}
 	</select>
 
+	<!-- Level ? -->
 	<span class="no-wrap">tech level:</span>
 	<select bind:value={tech.level}>
 		{#each [0, 1, 2, 3, 4] as level}
@@ -76,27 +71,21 @@
 		{/each}
 	</select>
 
-	<span class="grid-span-2 text-center">tech level required:</span>
+	<!-- Required -->
+	<span class="grid-span-2">tech level required:</span>
 	{#each techTypes as techType}
 		<LevelCounter bind:count={required[techType]} /><span>{techType}</span>
 	{/each}
 
-	<span class="grid-span-2 text-center">tech provided:</span>
-	{#each techTypes as techType}
-		<LevelCounter bind:count={provide[techType]} /><span>{techType}</span>
-	{/each}
-
+	<!-- Description -->
 	<textarea class="grid-span-2" bind:value={tech.description} />
 
 	<!-- Buttons -->
-	<button type="button" on:click={logTech}>logTech</button>
-	<button
-		type="button"
-		on:click={() => {
-			console.log({ techs });
-		}}>logTechs</button
-	>
-	<button type="submit">submit</button>
+	<div class="grid-span-2 text-center">
+		<button on:click|preventDefault={() => log({ tech })}>logTech</button>
+		<button on:click|preventDefault={() => log({ techs })}>logTechs</button>
+		<button type="submit">submit</button>
+	</div>
 </form>
 
 <style>
@@ -107,7 +96,14 @@
 		gap: 0.2rem;
 		grid-template-columns: min-content 1fr;
 		border: 1px solid black;
-		width: fit-content;
+		width: min-content;
+	}
+
+	.flex {
+		display: flex;
+		justify-content: center;
+		/* align-items: center; */
+		flex-wrap: wrap;
 	}
 
 	.no-wrap {
