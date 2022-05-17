@@ -12,9 +12,8 @@
   <TechForm bind:techs />
 
   <div class="flex">
-    {#each techs as tech (tech.name)}
+    {#each techs as tech (tech.required)}
       <TechDisplay {tech} />
-      <!-- <TechDisplay bind:tech /> -->
     {/each}
   </div>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Tech, TechType } from "src/types/tech.types";
+	import type { RessourceCost, Tech, TechType } from "src/types/tech.types";
 	import bioticLogo from "../assets/Biotic light.png";
 	import cyberneticLogo from "../assets/Cybernetic light.png";
 	import propulsionLogo from "../assets/Propulsion light.png";
@@ -8,22 +8,17 @@
 	export let tech: Tech;
 
 	const assignRequired = () => {
-		console.log("assignRequired tech.required:", tech.name, tech.required);
 		let newRequired: string[] = [];
 
-		for (let i = 0; i < tech.required.Biotic; i++) newRequired.push(bioticLogo);
-		for (let i = 0; i < tech.required.Cybernetic; i++)
-			newRequired.push(cyberneticLogo);
-		for (let i = 0; i < tech.required.Propulsion; i++)
-			newRequired.push(propulsionLogo);
-		for (let i = 0; i < tech.required.Warfare; i++)
-			newRequired.push(warfareLogo);
+		for (let i = 0; i < tech.required[0]; i++) newRequired.push(bioticLogo);
+		for (let i = 0; i < tech.required[1]; i++) newRequired.push(cyberneticLogo);
+		for (let i = 0; i < tech.required[2]; i++) newRequired.push(propulsionLogo);
+		for (let i = 0; i < tech.required[3]; i++) newRequired.push(warfareLogo);
 
 		return newRequired;
 	};
 
-	let requiredLogos = assignRequired();
-	console.log("just assign required:", requiredLogos);
+	const requiredLogos = assignRequired();
 
 	function getColor(techType: TechType) {
 		let color: string;
@@ -56,12 +51,12 @@
 </script>
 
 <div class="main">
-	<div class="title" style="color: {getColor(tech.techType)}">{tech.name}</div>
+	<div class="title" style:color={getColor(tech.techType)}>{tech.name}</div>
 
 	<div class="tech-require">
-		{#each requiredLogos as img}
+		{#each requiredLogos as src}
 			<div class="img-container">
-				<img class="scaled-down-img" src={img} alt="altLogo" />
+				<img class="scaled-down-img" {src} alt="altLogo" />
 			</div>
 		{/each}
 	</div>
@@ -79,13 +74,6 @@
 			</div>
 		{/if}
 	</div>
-
-	<button
-		on:click={() => {
-			console.log({ tech });
-			requiredLogos = assignRequired();
-		}}>refresh</button
-	>
 </div>
 
 <style lang="scss">
@@ -96,7 +84,7 @@
 		margin-left: 0.5rem;
 		display: grid;
 		grid-template-columns: min-content 1fr min-content;
-		grid-template-rows: min-content 1fr min-content;
+		grid-template-rows: min-content 1fr;
 
 		& > * {
 			grid-column: 2;

@@ -11,8 +11,7 @@
 		techType: "Biotic",
 		description: "During the status phase, draw 2 action cards instead of 1.",
 		isFactionTech: null,
-		required: {},
-		level: 0,
+		required: [0, 0, 0, 0],
 	};
 
 	const setTechType = (techType: TechType) => (e: Event) => {
@@ -20,8 +19,8 @@
 	};
 
 	const handleSubmit = (e: SubmitEvent) => {
-		log("submit");
 		let newTech: Tech = { ...tech };
+		newTech.required = [...tech.required];
 
 		const find = techs.find((elem) => elem.name === newTech.name);
 
@@ -31,6 +30,12 @@
 		}
 		log("submit end, techs:", techs);
 	};
+
+	// run each time `tech.name` change
+	$: tech.name = tech.name
+		.split(" ")
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(" ");
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
@@ -53,23 +58,15 @@
 	<span class="no-wrap">for faction:</span>
 	<select bind:value={tech.isFactionTech}>
 		<option value={null}>none</option>
-		{#each factions as faction}
-			<option value={faction}>{faction}</option>
-		{/each}
-	</select>
-
-	<!-- Level ? -->
-	<span class="no-wrap">tech level:</span>
-	<select bind:value={tech.level}>
-		{#each [0, 1, 2, 3, 4] as level}
-			<option value={level}>{level}</option>
+		{#each factions as value}
+			<option {value}>{value}</option>
 		{/each}
 	</select>
 
 	<!-- Required -->
 	<span class="grid-span-2">tech level required:</span>
-	{#each techTypes as techType}
-		<LevelCounter bind:count={tech.required[techType]} /><span>{techType}</span>
+	{#each techTypes as techType, i}
+		<LevelCounter bind:count={tech.required[i]} /><span>{techType}</span>
 	{/each}
 
 	<!-- Description -->
