@@ -8,7 +8,7 @@
 	export let tech: Tech;
 
 	const assignRequired = () => {
-		console.log("assignRequired tech.required:", tech.required);
+		console.log("assignRequired tech.required:", tech.name, tech.required);
 		let newRequired: string[] = [];
 
 		for (let i = 0; i < tech.required.Biotic; i++) newRequired.push(bioticLogo);
@@ -22,7 +22,8 @@
 		return newRequired;
 	};
 
-	let required = assignRequired();
+	let requiredLogos = assignRequired();
+	console.log("just assign required:", requiredLogos);
 
 	function getColor(techType: TechType) {
 		let color: string;
@@ -58,7 +59,7 @@
 	<div class="title" style="color: {getColor(tech.techType)}">{tech.name}</div>
 
 	<div class="tech-require">
-		{#each required as img}
+		{#each requiredLogos as img}
 			<div class="img-container">
 				<img class="scaled-down-img" src={img} alt="altLogo" />
 			</div>
@@ -81,7 +82,8 @@
 
 	<button
 		on:click={() => {
-			required = assignRequired();
+			console.log({ tech });
+			requiredLogos = assignRequired();
 		}}>refresh</button
 	>
 </div>

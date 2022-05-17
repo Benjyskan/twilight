@@ -27,10 +27,7 @@
 
 		if (find === undefined) techs = [...techs, newTech];
 		else {
-			let newTechs = techs.map((elem) =>
-				elem.name == tech.name ? newTech : elem
-			);
-			techs = newTechs;
+			techs = techs.map((elem) => (elem.name == tech.name ? newTech : elem));
 		}
 		log("submit end, techs:", techs);
 	};
