@@ -19,6 +19,7 @@
 	};
 
 	const handleSubmit = (e: SubmitEvent) => {
+		if (!tech.name) return;
 		let newTech: Tech = { ...tech };
 		newTech.required = [...tech.required];
 
@@ -80,7 +81,7 @@
 	</div>
 </form>
 
-<style>
+<style lang="scss">
 	form {
 		padding: 0.2rem;
 		display: grid;
@@ -92,8 +93,11 @@
 
 	.flex {
 		display: flex;
-		justify-content: center;
 		flex-wrap: wrap;
+
+		& > * {
+			flex-grow: 1;
+		}
 	}
 
 	.no-wrap {
