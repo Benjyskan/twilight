@@ -18,28 +18,15 @@
 		return newRequired;
 	};
 
-	const requiredLogos = assignRequired();
+	let requiredLogos = [];
+	$: tech, (requiredLogos = assignRequired());
 
-	function getColor(techType: TechType) {
-		let color: string;
-		switch (techType) {
-			case "Biotic":
-				color = "green";
-				break;
-			case "Cybernetic":
-				color = "chocolate";
-				break;
-			case "Propulsion":
-				color = "blue";
-				break;
-			case "Warfare":
-				color = "red";
-				break;
-			default:
-				color = "black";
-				break;
-		}
-		return color;
+	function getTechColor(type: TechType) {
+		if (type === "Biotic") return "green";
+		if (type === "Cybernetic") return "chocolate";
+		if (type === "Propulsion") return "blue";
+		if (type === "Warfare") return "red";
+		else return "black";
 	}
 
 	function getTechImg(type: TechType) {
@@ -51,7 +38,7 @@
 </script>
 
 <div class="main">
-	<div class="title" style:color={getColor(tech.techType)}>{tech.name}</div>
+	<div class="title" style:color={getTechColor(tech.techType)}>{tech.name}</div>
 
 	<div class="tech-require">
 		{#each requiredLogos as src}
@@ -79,7 +66,10 @@
 <style lang="scss">
 	.main {
 		border: 1px solid black;
-		width: clamp(9rem, 20vw, 18rem);
+		// width: clamp(9rem, 20vw, 18rem);
+		// aspect-ratio: 355/133;
+		aspect-ratio: 3/4;
+		width: 10rem;
 		margin-top: 0.5rem;
 		margin-left: 0.5rem;
 		display: grid;
@@ -92,12 +82,15 @@
 
 		.title {
 			text-align: center;
+			border-bottom: 1px solid black;
 		}
 
 		.description {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			font-size: small;
+			text-align: center;
 		}
 
 		.tech-require {

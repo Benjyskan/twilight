@@ -3,6 +3,7 @@
 	import type { Tech, TechType, Faction } from "../types/tech.types";
 	import { techTypes, factions } from "../const";
 	import LevelCounter from "./LevelCounter.svelte";
+	import TechDisplay from "./TechDisplay.svelte";
 
 	export let techs: Tech[] = [];
 
@@ -23,20 +24,24 @@
 		let newTech: Tech = { ...tech };
 		newTech.required = [...tech.required];
 
-		const find = techs.find((elem) => elem.name === newTech.name);
+		const found = techs.find((elem) => elem.name === newTech.name);
 
-		if (find === undefined) techs = [...techs, newTech];
+		if (found === undefined) techs = [...techs, newTech];
 		else {
 			techs = techs.map((elem) => (elem.name == tech.name ? newTech : elem));
 		}
 		log("submit end, techs:", techs);
 	};
 
-	// run each time `tech.name` change
+	// run each time `tech.name` change (every time `tech` change in reality)
 	$: tech.name = tech.name
 		.split(" ")
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(" ");
+
+	$: {
+		tech = tech;
+	}
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
@@ -81,6 +86,8 @@
 	</div>
 </form>
 
+<TechDisplay bind:tech />
+
 <style lang="scss">
 	form {
 		padding: 0.2rem;
@@ -89,6 +96,10 @@
 		grid-template-columns: min-content 1fr;
 		border: 1px solid black;
 		width: min-content;
+		min-width: min-content;
+		min-height: min-content;
+		resize: both; // add 'resize draggable'
+		overflow: auto; // add 'resize draggable'
 	}
 
 	.flex {
@@ -98,6 +109,10 @@
 		& > * {
 			flex-grow: 1;
 		}
+	}
+
+	textarea {
+		resize: vertical;
 	}
 
 	.no-wrap {
