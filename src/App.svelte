@@ -1,7 +1,10 @@
 <script lang="ts">
+  import type { Tech } from "./types/tech.types";
   import TechCard from "./lib/TechCard.svelte";
   import TechForm from "./lib/TechForm.svelte";
-  import type { Tech } from "./types/tech.types";
+  import { flip } from "svelte/animate";
+  import { scale } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
 
   let techs: Tech[] = [];
 </script>
@@ -13,7 +16,12 @@
 
   <div class="flex">
     {#each techs as tech (tech.required)}
-      <TechCard {tech} />
+      <div
+        animate:flip={{ duration: 300 }}
+        in:scale={{ easing: quintOut, duration: 300 }}
+      >
+        <TechCard {tech} />
+      </div>
     {/each}
   </div>
   <hr />
