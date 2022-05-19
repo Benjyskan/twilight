@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TechDisplay from "./lib/TechDisplay.svelte";
+  import TechCard from "./lib/TechCard.svelte";
   import TechForm from "./lib/TechForm.svelte";
   import type { Tech } from "./types/tech.types";
 
@@ -13,7 +13,7 @@
 
   <div class="flex">
     {#each techs as tech (tech.required)}
-      <TechDisplay {tech} />
+      <TechCard {tech} />
     {/each}
   </div>
   <hr />

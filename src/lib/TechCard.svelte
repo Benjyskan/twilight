@@ -35,6 +35,8 @@
 		if (type === "Propulsion") return propulsionLogo;
 		if (type === "Warfare") return warfareLogo;
 	}
+
+	$: console.log(tech.description.split("\n"));
 </script>
 
 <div class="main">
@@ -48,7 +50,13 @@
 		{/each}
 	</div>
 
-	<div class="description">{tech.description}</div>
+	<div class="description">
+		<ul>
+			{#each tech.description.split("\n") as line}
+				<li>{line}</li>
+			{/each}
+		</ul>
+	</div>
 
 	<div class="tech-provide">
 		{#if tech.techType}
@@ -66,8 +74,7 @@
 <style lang="scss">
 	.main {
 		border: 1px solid black;
-		// width: clamp(9rem, 20vw, 18rem);
-		// aspect-ratio: 355/133;
+		border-radius: 6px;
 		aspect-ratio: 3/4;
 		width: 10rem;
 		margin-top: 0.5rem;
@@ -76,29 +83,33 @@
 		grid-template-columns: min-content 1fr min-content;
 		grid-template-rows: min-content 1fr;
 
-		& > * {
-			grid-column: 2;
-		}
-
 		.title {
 			text-align: center;
-			border-bottom: 1px solid black;
+			// border-bottom: 1px solid black;
 		}
 
 		.description {
-			display: flex;
-			justify-content: center;
-			align-items: center;
+			overflow: auto;
+			overflow-wrap: break-word;
 			font-size: small;
-			text-align: center;
+
+			> ul {
+				list-style: inside;
+				margin: 0;
+				padding: 0.3rem;
+				> ::marker {
+					content: "- ";
+				}
+			}
 		}
 
 		.tech-require {
 			grid-column: 1;
 			grid-row: 1 / span 3;
 		}
+
 		.tech-provide {
-			grid-column: -1;
+			grid-column: 3;
 			grid-row: 1 / span 3;
 		}
 	}

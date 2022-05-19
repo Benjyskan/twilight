@@ -3,7 +3,7 @@
 	import type { Tech, TechType, Faction } from "../types/tech.types";
 	import { techTypes, factions } from "../const";
 	import LevelCounter from "./LevelCounter.svelte";
-	import TechDisplay from "./TechDisplay.svelte";
+	import TechCard from "./TechCard.svelte";
 
 	export let techs: Tech[] = [];
 
@@ -90,7 +90,7 @@
 	</form>
 
 	<div>
-		<TechDisplay {tech} />
+		<TechCard {tech} />
 	</div>
 </div>
 
