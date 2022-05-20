@@ -6,6 +6,7 @@
 	import TechCard from "./TechCard.svelte";
 
 	export let techs: Tech[] = [];
+	let nameInput: HTMLInputElement;
 
 	let tech: Tech = {
 		name: "Neural Motivator",
@@ -33,6 +34,8 @@
 			techs = techs.map((t) => (t.name == newTech.name ? newTech : t));
 		}
 		log("submit end, techs[0].name:", techs[0]?.name);
+		nameInput.focus();
+		nameInput.select();
 	};
 
 	// run each time `tech.name` change (every time `tech` change in reality)
@@ -46,7 +49,12 @@
 	<form on:submit|preventDefault={handleSubmit}>
 		<!-- Name -->
 		<span class="no-wrap">name: </span>
-		<input label="label" type="text" bind:value={tech.name} />
+		<input
+			label="label"
+			type="text"
+			bind:value={tech.name}
+			bind:this={nameInput}
+		/>
 
 		<!-- Tech Type -->
 		<span class="grid-span-2">tech type: {tech.techType}</span>
