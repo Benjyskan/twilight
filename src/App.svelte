@@ -5,6 +5,7 @@
   import { flip } from "svelte/animate";
   import { scale } from "svelte/transition";
   import { quintOut } from "svelte/easing";
+  import { getTechs, postTech } from "./scripts/api";
 
   let techs: Tech[] = [];
 </script>
@@ -24,6 +25,9 @@
       </div>
     {/each}
   </div>
+  <hr />
+  <button on:click={getTechs}>get techs</button>
+  <button on:click={postTech}>get techs</button>
   <hr />
   {JSON.stringify(techs)}
 </div>
