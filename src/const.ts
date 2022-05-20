@@ -8,7 +8,7 @@ export const techTypes: TechType[] = [
 ];
 export const factions: Faction[] = ["The Arborec"];
 
-// export const api = 'https://deno-vercel-serverless-functions-benjyskan.vercel.app/api'
-export const apiPath = 'http://localhost:3000/api'
+export const apiPath = 'https://deno-vercel-serverless-functions-benjyskan.vercel.app/api'
+// export const apiPath = 'http://localhost:3000/api'
 
 // console.log('PROCESS:', process)
