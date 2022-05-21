@@ -10,10 +10,10 @@
   let techs: Tech[] = [];
 </script>
 
-<div class="main">
-  <h1>TI tech editor</h1>
-
+<h1>TI tech editor</h1>
+<main>
   <TechForm bind:techs />
+  <hr />
 
   <div class="flex">
     {#each techs as tech (tech.required)}
@@ -25,12 +25,16 @@
       </div>
     {/each}
   </div>
-  <hr />
-  <button on:click={getTechs}>get techs</button>
-  <button on:click={postTech}>post techs</button>
-  <hr />
-  {JSON.stringify(techs)}
-</div>
+
+  {#if techs.length}
+    <hr />
+    <button on:click={getTechs}>get techs</button>
+    <button on:click={postTech}>post techs</button>
+    <hr />
+  {/if}
+
+  <textarea id="json-output">{JSON.stringify(techs)}</textarea>
+</main>
 
 <style lang="scss">
   :root {
@@ -38,7 +42,7 @@
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
 
-  .main {
+  main {
     padding: 1em;
     margin: 0 auto;
   }
@@ -47,6 +51,10 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  #json-output {
+    width: 100%;
   }
 
   @media (min-width: 480px) {
