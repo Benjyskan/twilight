@@ -53,8 +53,9 @@
     flex-wrap: wrap;
   }
 
-  #json-output {
-    width: 100%;
+  textarea#json-output {
+    width: -webkit-fill-available;
+    resize: vertical;
   }
 
   @media (min-width: 480px) {
