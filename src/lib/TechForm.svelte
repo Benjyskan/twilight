@@ -20,7 +20,7 @@
 		tech.techType = techType;
 	};
 
-	const handleSubmit = (e: SubmitEvent) => {
+	const handleSubmit = () => {
 		if (!tech.name) return;
 
 		let newTech: Tech = { ...tech };
@@ -50,6 +50,9 @@
 		<!-- Name -->
 		<span class="no-wrap">name: </span>
 		<input
+			on:keydown={(e) => {
+				if (e.key === "Enter") handleSubmit();
+			}}
 			label="label"
 			type="text"
 			bind:value={tech.name}
