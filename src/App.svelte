@@ -8,6 +8,11 @@
   import { getTechs, postTech } from "./api";
 
   let techs: Tech[] = [];
+
+  function removeTech(techName: string) {
+    console.log("remove:", techName);
+    techs = techs.filter((tech) => tech.name !== techName);
+  }
 </script>
 
 <h1>TI tech editor</h1>
@@ -21,7 +26,7 @@
         animate:flip={{ duration: 300 }}
         in:scale={{ easing: quintOut, duration: 300 }}
       >
-        <TechCard {tech} />
+        <TechCard {tech} {removeTech} isDeletable />
       </div>
     {/each}
   </div>

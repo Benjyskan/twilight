@@ -6,6 +6,8 @@
 	import warfareLogo from "../assets/Warfare light.png";
 
 	export let tech: Tech;
+	export let isDeletable: boolean = false;
+	export let removeTech: ((name: string) => void) | undefined = undefined;
 
 	const assignRequired = () => {
 		let newRequired: string[] = [];
@@ -36,7 +38,7 @@
 		if (type === "Warfare") return warfareLogo;
 	}
 
-	$: console.log(tech.description.split("\n"));
+	// $: console.log(tech.description.split("\n"));
 </script>
 
 <div class="main">
@@ -59,6 +61,11 @@
 	</div>
 
 	<div class="tech-provide">
+		{#if isDeletable}
+			<button on:click={() => removeTech(tech.name)} class="delete-btn">
+				X
+			</button>
+		{/if}
 		{#if tech.techType}
 			<div class="img-container">
 				<img
@@ -111,6 +118,14 @@
 		.tech-provide {
 			grid-column: 3;
 			grid-row: 1 / span 3;
+			.delete-btn {
+				background: none;
+				border: none;
+				color: #ddd;
+				&:hover {
+					color: #222;
+				}
+			}
 		}
 	}
 
