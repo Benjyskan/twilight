@@ -16,6 +16,7 @@
   <a href="#tech_editor">Tech Editor</a>
   <a href="#guide">Guide</a>
   <a href="#strategy_cards">Strategy Cards</a>
+  <a href="#tech_editor">{import.meta.env.DEV}</a>
 </Nav>
 {#if page === "#tech_editor"}
   <TechEditor />
