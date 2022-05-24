@@ -1,43 +1,70 @@
 <script lang="ts">
-  import type { Tech } from "./types/tech.types";
-  import TechCard from "./lib/TechCard.svelte";
-  import TechForm from "./lib/TechForm.svelte";
   import Nav from "./layouts/Nav.svelte";
-  import { flip } from "svelte/animate";
-  import { scale } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
-  import { getTechs, postTech } from "./api";
+  import TechEditor from "./pages/TechEditor.svelte";
   import { techsStore } from "./stores/tech_store";
+
+  let page = document.location.hash;
+
+  window.onpopstate = (event) => {
+    page = document.location.hash;
+  };
 </script>
 
 <Nav>
-  <h1>TI tech editor</h1>
-  <main>
-    <TechForm />
-    <hr />
-
-    <div class="flex">
-      {#each $techsStore as tech (tech.required)}
-        <div
-          animate:flip={{ duration: 300 }}
-          in:scale={{ easing: quintOut, duration: 300 }}
-        >
-          <TechCard {tech} isDeletable />
-          <!-- <TechCard {tech} {removeTech} isDeletable /> -->
-        </div>
-      {/each}
-    </div>
-
-    {#if $techsStore.length}
-      <hr />
-      <button on:click={getTechs}>get techs</button>
-      <button on:click={postTech}>post techs</button>
-      <hr />
-    {/if}
-
-    <textarea id="json-output">{JSON.stringify($techsStore)}</textarea>
-  </main>
+  <a href="#tech_editor">Tech Editor</a>
+  <a href="#guide">Guide</a>
 </Nav>
+{#if page === "#tech_editor"}
+  <TechEditor />
+{:else if page === "#guide"}
+  <h2>Starting Units</h2>
+  <ul>
+    <li>1 Dreadnought</li>
+    <li>1 Carrier</li>
+    <li>3 Fighter</li>
+    <li>5 Infantry</li>
+    <li>1 Space Dock</li>
+    <li>1 PDS</li>
+  </ul>
+
+  <h2>Starting Techs</h2>
+  <ul>
+    <li>Neural Motivator</li>
+    <li>Plasma Scoring</li>
+  </ul>
+
+  <h2>Faction Abilities</h2>
+  <ul>
+    <li>
+      <strong>ASSIMILATE</strong>: When you gain control of a planet, replace
+      each PDS and space dock that is on that planet with a matching unit from
+      your reinforcements.
+    </li>
+    <li>
+      <strong>HARROW</strong>: At the end of each round of ground combat, your
+      ships in the active system may use their Bombardment abilities against
+      your opponent's ground forces on the planet.
+    </li>
+  </ul>
+
+  <h2>Factions Techs</h2>
+  <ul>
+    <li>Inhericance Systems</li>
+  </ul>
+
+  <h2>Faction Specific Units</h2>
+  <ul>
+    <li>Super-DreadNought I</li>
+    <li>Super-DreadNought II</li>
+  </ul>
+
+  <h2>Faction Specific Units</h2>
+  <p>L1Z1X Flagship</p>
+
+  <textarea>{JSON.stringify($techsStore)}</textarea>
+{:else}
+  <p>not found...</p>
+{/if}
 
 <style lang="scss">
   :root {
@@ -45,25 +72,7 @@
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
 
-  main {
-    padding: 1em;
-    margin: 0 auto;
-  }
-
-  .flex {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  textarea#json-output {
-    width: -webkit-fill-available;
-    resize: vertical;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
-    }
+  textarea {
+    width: 100%;
   }
 </style>
