@@ -91,6 +91,10 @@
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
 
+  :global(body) {
+    margin: 0;
+  }
+
   .guide {
     display: flex;
     flex-wrap: wrap;
