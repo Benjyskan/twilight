@@ -91,7 +91,7 @@
     </div>
   </form>
 
-  <div>
+  <div id="card-wrapper">
     <TechCard {tech} />
   </div>
 </div>
@@ -108,6 +108,10 @@
     min-height: min-content;
     resize: both; // add 'resize draggable'
     overflow: auto; // add 'resize draggable'
+  }
+
+  #card-wrapper {
+    padding-left: 0.2rem;
   }
 
   .main-wrapper {

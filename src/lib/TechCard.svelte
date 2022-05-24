@@ -8,6 +8,7 @@
 
   export let tech: Tech;
   export let isDeletable: boolean = false;
+  export let color: string = "";
   // export let removeTech: ((name: string) => void) | undefined = undefined;
 
   const assignRequired = () => {
@@ -42,7 +43,7 @@
   // $: console.log(tech.description.split("\n"));
 </script>
 
-<div class="main">
+<div class="main" style="--bg-color: {color}">
   <div class="title" style:color={getTechColor(tech.techType)}>{tech.name}</div>
 
   <div class="tech-require">
@@ -88,8 +89,9 @@
     border-radius: 6px;
     aspect-ratio: 3/4;
     width: 10rem;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
+    background-color: var(--bg-color);
+    /* margin-top: 0.5rem; */
+    /* margin-left: 0.5rem; */
     display: grid;
     grid-template-columns: min-content 1fr min-content;
     grid-template-rows: min-content 1fr;

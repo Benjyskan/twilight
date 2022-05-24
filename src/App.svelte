@@ -1,5 +1,6 @@
 <script lang="ts">
   import Nav from "./layouts/Nav.svelte";
+  import CardPrev from "./lib/CardPrev.svelte";
   import TechEditor from "./pages/TechEditor.svelte";
   import { techsStore } from "./stores/tech_store";
 
@@ -33,8 +34,8 @@
     <div class="container">
       <h2>Starting Techs</h2>
       <ul>
-        <li>Neural Motivator</li>
-        <li>Plasma Scoring</li>
+        <li><CardPrev name="Neural Motivator" /></li>
+        <li><CardPrev name="Plasma Scoring" /></li>
       </ul>
     </div>
 

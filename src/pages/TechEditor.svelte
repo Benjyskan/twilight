@@ -16,6 +16,7 @@
   <div class="flex">
     {#each $techsStore as tech (tech.required)}
       <div
+        class="wrapper"
         animate:flip={{ duration: 300 }}
         in:scale={{ easing: quintOut, duration: 300 }}
       >
@@ -44,6 +45,10 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .wrapper {
+    padding: 0.2rem;
   }
 
   textarea#json-output {
