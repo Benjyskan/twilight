@@ -2,6 +2,7 @@
   import Nav from "./layouts/Nav.svelte";
   import CardPrev from "./lib/CardPrev.svelte";
   import TechEditor from "./pages/TechEditor.svelte";
+  import StrategyCards from "./pages/StrategyCards.svelte";
   import { techsStore } from "./stores/tech_store";
 
   let page = document.location.hash;
@@ -14,9 +15,12 @@
 <Nav>
   <a href="#tech_editor">Tech Editor</a>
   <a href="#guide">Guide</a>
+  <a href="#strategy_cards">Strategy Cards</a>
 </Nav>
 {#if page === "#tech_editor"}
   <TechEditor />
+{:else if page === "#strategy_cards"}
+  <StrategyCards />
 {:else if page === "#guide"}
   <div class="guide">
     <div class="container">

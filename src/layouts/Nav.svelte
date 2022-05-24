@@ -1,6 +1,5 @@
 <nav>
   <slot />
-  <a href="/">link 3</a>
 </nav>
 
 <style lang="scss">

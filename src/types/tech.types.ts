@@ -10,3 +10,12 @@ export type Tech = {
   required: RessourceCost
   isFactionTech: Faction | null
 }
+
+export type Strat = {
+  link: string,
+  name: string,
+  color: string,
+  initiative: number,
+  primary_abilities: string[],
+  secondary_abilities: string[]
+}

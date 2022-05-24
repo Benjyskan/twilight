@@ -90,8 +90,6 @@
     aspect-ratio: 3/4;
     width: 10rem;
     background-color: var(--bg-color);
-    /* margin-top: 0.5rem; */
-    /* margin-left: 0.5rem; */
     display: grid;
     grid-template-columns: min-content 1fr min-content;
     grid-template-rows: min-content 1fr;
