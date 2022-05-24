@@ -2,44 +2,42 @@
   import type { Tech } from "./types/tech.types";
   import TechCard from "./lib/TechCard.svelte";
   import TechForm from "./lib/TechForm.svelte";
+  import Nav from "./layouts/Nav.svelte";
   import { flip } from "svelte/animate";
   import { scale } from "svelte/transition";
   import { quintOut } from "svelte/easing";
   import { getTechs, postTech } from "./api";
-
-  let techs: Tech[] = [];
-
-  function removeTech(techName: string) {
-    console.log("remove:", techName);
-    techs = techs.filter((tech) => tech.name !== techName);
-  }
+  import { techsStore } from "./stores/tech_store";
 </script>
 
-<h1>TI tech editor</h1>
-<main>
-  <TechForm bind:techs />
-  <hr />
-
-  <div class="flex">
-    {#each techs as tech (tech.required)}
-      <div
-        animate:flip={{ duration: 300 }}
-        in:scale={{ easing: quintOut, duration: 300 }}
-      >
-        <TechCard {tech} {removeTech} isDeletable />
-      </div>
-    {/each}
-  </div>
-
-  {#if techs.length}
+<Nav>
+  <h1>TI tech editor</h1>
+  <main>
+    <TechForm />
     <hr />
-    <button on:click={getTechs}>get techs</button>
-    <button on:click={postTech}>post techs</button>
-    <hr />
-  {/if}
 
-  <textarea id="json-output">{JSON.stringify(techs)}</textarea>
-</main>
+    <div class="flex">
+      {#each $techsStore as tech (tech.required)}
+        <div
+          animate:flip={{ duration: 300 }}
+          in:scale={{ easing: quintOut, duration: 300 }}
+        >
+          <TechCard {tech} isDeletable />
+          <!-- <TechCard {tech} {removeTech} isDeletable /> -->
+        </div>
+      {/each}
+    </div>
+
+    {#if $techsStore.length}
+      <hr />
+      <button on:click={getTechs}>get techs</button>
+      <button on:click={postTech}>post techs</button>
+      <hr />
+    {/if}
+
+    <textarea id="json-output">{JSON.stringify($techsStore)}</textarea>
+  </main>
+</Nav>
 
 <style lang="scss">
   :root {
